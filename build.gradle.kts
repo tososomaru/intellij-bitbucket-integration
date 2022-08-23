@@ -1,29 +1,47 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("java")
     id("org.jetbrains.intellij") version "1.8.0"
+    kotlin("jvm") version "1.7.0"
 }
 
 group = "io.tososomaru.intellij.integration"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
 }
 
-// Configure Gradle IntelliJ Plugin
-// Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
     version.set("2022.2")
-    type.set("IC") // Target IDE Platform
+    type.set("IC")
+}
 
-    plugins.set(listOf(/* Plugin Dependencies */))
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
 }
 
 tasks {
-    // Set the JVM compatibility versions
+
     withType<JavaCompile> {
         sourceCompatibility = "11"
         targetCompatibility = "11"
+    }
+
+    withType<KotlinCompile> {
+        kotlinOptions {
+            apiVersion = "1.7"
+            jvmTarget = "11"
+        }
     }
 
     patchPluginXml {
