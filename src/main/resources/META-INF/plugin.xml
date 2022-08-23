@@ -25,6 +25,6 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-
+        <projectConfigurable groupId="tools" id="bitbucketintegration" displayName="Bitbucket Integration" instance="io.tososomaru.intellij.integration.bitbucket.config.BitbucketSettingsConfigurable"/>
     </extensions>
 </idea-plugin>
